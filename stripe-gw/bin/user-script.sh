@@ -6,7 +6,7 @@ cd ~
 ### Create the SSL Certificate
 openssl genrsa -out stripe.key 2048
 openssl req -new -key stripe.key -out stripe.csr -subj "/C=US/ST=California/L=Santa Clara/O=Ericsson/OU=BMDA/CN=$1/emailAddress=$2"
-openssl x509 -req -days 365 -in mlp.csr -signkey stripe.key -out stripe.crt
+openssl x509 -req -days 365 -in stripe.csr -signkey stripe.key -out stripe.crt
 
 cp stripe.crt /vagrant
 
