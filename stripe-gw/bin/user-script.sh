@@ -18,4 +18,4 @@ virtualenv boxenv
 boxenv/bin/pip install --upgrade pip
 boxenv/bin/pip install -r requirements.txt
 
-tmux new-session -s server -d 'boxenv/bin/uwsgi --ini app.ini'
+tmux new-session -s server -d "SECRET_KEY=$3 PUBLISHABLE_KEY=$4 boxenv/bin/uwsgi --ini app.ini"

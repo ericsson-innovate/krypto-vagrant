@@ -30,6 +30,14 @@ All Vagrant boxes need to create CERT files to be able to serve on SSL. Edit the
 CERT_EMAIL_ADDRESS = <your email address>
 ```
 
+### STRIPE Configuration
+Edit Vagrantfile and edit your keys for STRIPE
+```
+SECRET_KEY = ""
+PUBLISHABLE_KEY = ""
+```
+
+
 ## Running Krypto
 From the root of this directory (at the same level of Vagrantfile), you can start all the boxes all at once:
 
@@ -37,7 +45,7 @@ From the root of this directory (at the same level of Vagrantfile), you can star
 vagrant up
 ```
 
-You can also start each boxes separately:
+You can also start each box separately:
 
 ```shell
 vagrant up kryptoblog_box
@@ -51,6 +59,28 @@ vagrant up mlp-box
 ```shell
 vagrant up stripe_box
 ```
+
+## Installing the certificates on your computer
+Each Vagrant box will create certificate (at the root level of this directory) to allow the running servers to be trusted on your machine.
+- nginx-selfsigned.crt (certificate for the blogger website)
+- mlp.crt (certificate for the MLP proxy)
+- stripe.crt (certificate for the Stripe gateway)
+
+Install these certificates on your machine and trust them.
+
+Open the certificate
+
+![Open Certificate](/images/cert1.png)
+
+
+Find the certificate on your system
+
+![Find Certificate](/images/cert2.png)
+
+Trust the certificate to be used with SSL and with X.509 Basic Policy
+
+![Trust Certificate](/images/cert3.png)
+
 ## Monitoring Krypto
 
 ### MLP PROXY
@@ -67,7 +97,7 @@ Ctrl-b d
 
 ### STRIPE GW
 ```shell
-vagrant ssh stripe_box
+vagrant ssh strip
 tmux attach -t server
 ```
 

@@ -2,15 +2,19 @@
 # vi: set ft=ruby :
 
 
-KRYPTO_BLOG_PATH = "/Users/thao/Documents/Krypto/krypto-blogger-frontend"
-MLP_PATH = "/Users/thao/Documents/Krypto/krypto-mlp-mockup"
-STRIPE_GW_PATH = "/Users/thao/Documents/Krypto/krypto-checkout-gw"
+KRYPTO_BLOG_PATH = ""
+MLP_PATH = ""
+STRIPE_GW_PATH = ""
 
-CERT_EMAIL_ADDRESS = "ho.thanh.thao.nguyen@ericsson.com"
+CERT_EMAIL_ADDRESS = ""
 
 KRYPTO_BLOG_IP = "192.168.56.100"
 MLP_IP = "192.168.56.101"
 STRIPE_GW_IP = "192.168.56.102"
+
+SECRET_KEY = ""
+PUBLISHABLE_KEY = ""
+
 
 Vagrant.configure(2) do |config|
 	# Use a box with ubuntu 16.04
@@ -47,8 +51,8 @@ Vagrant.configure(2) do |config|
 		stripe_box.vm.network :forwarded_port, host: 5090, guest: 5090	
 		stripe_box.vm.network :forwarded_port, host: 5943, guest: 5943	
 		
-    	stripe_box.vm.provision "shell", path: "stripe-gw/bin/script.sh", args: [STRIPE_GW_IP, CERT_EMAIL_ADDRESS], privileged: true
-    	stripe_box.vm.provision "shell", path: "stripe-gw/bin/user-script.sh", privileged: false
+    	stripe_box.vm.provision "shell", path: "stripe-gw/bin/script.sh", privileged: true
+    	stripe_box.vm.provision "shell", path: "stripe-gw/bin/user-script.sh", args: [STRIPE_GW_IP, CERT_EMAIL_ADDRESS, SECRET_KEY, PUBLISHABLE_KEY], privileged: false
 
 		stripe_box.vm.synced_folder STRIPE_GW_PATH, "/home/ubuntu/krypto-checkout-gw"
   	end
