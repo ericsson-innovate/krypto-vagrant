@@ -1,0 +1,22 @@
+---
+configs:
+    krypto_blog:
+      code_path: "/Users/thao/Documents/Krypto/krypto-blogger-frontend"
+      private_ip: '192.168.56.100'
+      private_port: 80
+      private_port_ssl: 443
+    mlp_proxy:
+      code_path: '/Users/thao/Documents/Krypto/krypto-mlp-mockup'
+      private_ip: '192.168.56.101'
+      private_port: 5080
+      private_port_ssl: 5443
+    stripe_gw:
+      code_path: '/Users/thao/Documents/Krypto/krypto-checkout-gw'
+      private_ip: '192.168.56.102'
+      private_port: 5090
+      private_port_ssl: 5943
+      secret_key: 'sk_0FOJUN798R7KlfLTIFql0tujucuDs'
+      publishable_key: 'pk_0FOJ8USpMNeLYOaKPs7S4rB7jCAqP'
+    ssl_certificate:
+      email: 'ho.thanh.thao.nguyen@ericsson.com'
+

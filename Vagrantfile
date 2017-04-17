@@ -1,19 +1,28 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+require 'yaml'
 
-KRYPTO_BLOG_PATH = ""
-MLP_PATH = ""
-STRIPE_GW_PATH = ""
+#read configuration file
+current_dir    = File.dirname(File.expand_path(__FILE__))
+configs        = YAML.load_file("#{current_dir}/config.yaml")
+vagrant_config = configs['configs']
 
-CERT_EMAIL_ADDRESS = ""
 
-KRYPTO_BLOG_IP = "192.168.56.100"
-MLP_IP = "192.168.56.101"
-STRIPE_GW_IP = "192.168.56.102"
+#assign all variables
+KRYPTO_BLOG_PATH = vagrant_config['krypto_blog']['code_path']
+MLP_PATH = vagrant_config['mlp_proxy']['code_path']
+STRIPE_GW_PATH = vagrant_config['stripe_gw']['code_path']
 
-SECRET_KEY = ""
-PUBLISHABLE_KEY = ""
+CERT_EMAIL_ADDRESS = vagrant_config['ssl_certificate']['email']
+
+KRYPTO_BLOG_IP = vagrant_config['krypto_blog']['private_ip']
+MLP_IP = vagrant_config['mlp_proxy']['private_ip']
+STRIPE_GW_IP = vagrant_config['stripe_gw']['private_ip']
+
+SECRET_KEY = vagrant_config['stripe_gw']['secret_key']
+PUBLISHABLE_KEY = vagrant_config['stripe_gw']['publishable_key']
+
 
 
 Vagrant.configure(2) do |config|
