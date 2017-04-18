@@ -14,6 +14,7 @@ KRYPTO_BLOG_PATH = vagrant_config['krypto_blog']['code_path']
 MLP_PATH = vagrant_config['mlp_proxy']['code_path']
 STRIPE_GW_PATH = vagrant_config['stripe_gw']['code_path']
 
+CERT_NAME = vagrant_config['ssl_certificate']['name']
 CERT_EMAIL_ADDRESS = vagrant_config['ssl_certificate']['email']
 
 KRYPTO_BLOG_IP = vagrant_config['krypto_blog']['private_ip']
@@ -38,7 +39,7 @@ Vagrant.configure(2) do |config|
 		kryptoblog_box.vm.network :forwarded_port, host: 8080, guest: 80
 		kryptoblog_box.vm.network :forwarded_port, host: 8443, guest: 443
 		
-    	kryptoblog_box.vm.provision "shell", path: "krypto-blog/bin/script.sh", args: [KRYPTO_BLOG_IP, CERT_EMAIL_ADDRESS], privileged: true
+    	kryptoblog_box.vm.provision "shell", path: "krypto-blog/bin/script.sh", args: [CERT_NAME, CERT_EMAIL_ADDRESS], privileged: true
 
 		kryptoblog_box.vm.synced_folder KRYPTO_BLOG_PATH, "/var/www/html"
   	end
@@ -51,7 +52,7 @@ Vagrant.configure(2) do |config|
 		
 		
     	mlp_box.vm.provision "shell", path: "mlp-proxy/bin/script.sh", privileged: true
-    	mlp_box.vm.provision "shell", path: "mlp-proxy/bin/user-script.sh", args: [MLP_IP, CERT_EMAIL_ADDRESS], privileged: false
+    	mlp_box.vm.provision "shell", path: "mlp-proxy/bin/user-script.sh", args: [CERT_NAME, CERT_EMAIL_ADDRESS], privileged: false
 
 		mlp_box.vm.synced_folder MLP_PATH, "/home/ubuntu/krypto-mlp-mockup"
   	end
@@ -63,7 +64,7 @@ Vagrant.configure(2) do |config|
 		stripe_box.vm.network :forwarded_port, host: 5943, guest: 5943	
 		
     	stripe_box.vm.provision "shell", path: "stripe-gw/bin/script.sh", privileged: true
-    	stripe_box.vm.provision "shell", path: "stripe-gw/bin/user-script.sh", args: [STRIPE_GW_IP, CERT_EMAIL_ADDRESS, SECRET_KEY, PUBLISHABLE_KEY], privileged: false
+    	stripe_box.vm.provision "shell", path: "stripe-gw/bin/user-script.sh", args: [CERT_NAME, CERT_EMAIL_ADDRESS, SECRET_KEY, PUBLISHABLE_KEY], privileged: false
 
 		stripe_box.vm.synced_folder STRIPE_GW_PATH, "/home/ubuntu/krypto-checkout-gw"
   	end

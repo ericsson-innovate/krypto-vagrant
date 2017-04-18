@@ -1,0 +1,23 @@
+---
+configs:
+    krypto_blog:
+      code_path: "TO_BE_EDITED"
+      private_ip: '192.168.56.100'
+      private_port: 80
+      private_port_ssl: 443
+    mlp_proxy:
+      code_path: 'TO_BE_EDITED'
+      private_ip: '192.168.56.101'
+      private_port: 5080
+      private_port_ssl: 5443
+    stripe_gw:
+      code_path: 'TO_BE_EDITED'
+      private_ip: '192.168.56.102'
+      private_port: 5090
+      private_port_ssl: 5943
+      secret_key: 'TO_BE_EDITED'
+      publishable_key: 'TO_BE_EDITED'
+    ssl_certificate:
+      email: 'TO_BE_EDITED'
+      name: 'TO_BE_EDITED'
+
