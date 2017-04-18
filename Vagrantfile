@@ -36,6 +36,7 @@ Vagrant.configure(2) do |config|
 	config.vm.define "kryptoblog_box" do |kryptoblog_box|
 		kryptoblog_box.vm.network "private_network", ip: KRYPTO_BLOG_IP
 		kryptoblog_box.vm.network :forwarded_port, host: 8080, guest: 80
+		kryptoblog_box.vm.network :forwarded_port, host: 8443, guest: 443
 		
     	kryptoblog_box.vm.provision "shell", path: "krypto-blog/bin/script.sh", args: [KRYPTO_BLOG_IP, CERT_EMAIL_ADDRESS], privileged: true
 
@@ -47,6 +48,7 @@ Vagrant.configure(2) do |config|
 		mlp_box.vm.network "private_network", ip: MLP_IP
 		mlp_box.vm.network :forwarded_port, host: 5080, guest: 5080	
 		mlp_box.vm.network :forwarded_port, host: 5443, guest: 5443	
+		
 		
     	mlp_box.vm.provision "shell", path: "mlp-proxy/bin/script.sh", privileged: true
     	mlp_box.vm.provision "shell", path: "mlp-proxy/bin/user-script.sh", args: [MLP_IP, CERT_EMAIL_ADDRESS], privileged: false
