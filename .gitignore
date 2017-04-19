@@ -1,2 +1,3 @@
 *.crt
 *.log
+config.yaml

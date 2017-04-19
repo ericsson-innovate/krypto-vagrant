@@ -7,11 +7,12 @@ There are currently three Vagrant boxes for Krypto
 
 ## Vagrant configuration
 Before starting, copy the config_template.yaml file to config.yaml and edit the followings:
+
 ### Link your Vagrant boxes with your local code
 ```
-__configs -> krypto_blog -> code_path__ = <path to krypto-blog-frontend>
-__configs -> mlp_proxy -> code_path__ = <path to krypto-mlp-mockup>
-__configs -> stripe_gw -> code_path__ = <path to krypto-checkout-gw>
+configs -> krypto_blog -> code_path = <path to krypto-blog-frontend>
+configs -> mlp_proxy -> code_path = <path to krypto-mlp-mockup>
+configs -> stripe_gw -> code_path = <path to krypto-checkout-gw>
 ```
 
 ### Configure the ip addresses of your Vagrant boxes (optional)
@@ -24,7 +25,10 @@ __configs -> stripe_gw -> private_ip__ = <stripe gateway ip address>
 
 ### Configure the CERT files information (email address) for all your Vagrant boxes
 All Vagrant boxes need to create CERT files to be able to serve on SSL. Edit the following variable with your email address and the ip address of your host machine. 
+
 | type _ifconfig -a_ to find the public ip address of your host machine |
+
+
 ```
 name = <public ip address of your HOST machine>
 email = <your email address>
@@ -61,7 +65,8 @@ vagrant up stripe_box
 ```
 
 _IMPORTANT_
-You need to edit config.json of krypto_blog_frontend project and change the IP addresses of MLP_URL and STRIPE_URL to the public ip address of your host machine.
+You need to edit config.json of krypto_blog_frontend project and change the IP addresses of __mlp_proxy_url__ and __stripe_gw_url__ with a URL that includes the public ip address of your host machine.
+
 | type _ifconfig -a_ to find the public ip address of your host machine |
 
 
@@ -84,6 +89,12 @@ To detach from TMUX:
 Ctrl-b d
 ```
 
+To restart a  new TMUX screen and start the server
+```
+tmux new-session -s server
+cd krypto-mlp-mockup
+boxenv/bin/uwsgi --ini app.ini
+```
 
 ### STRIPE GW
 ```shell
@@ -96,6 +107,17 @@ To detach from TMUX:
 Ctrl-b d
 ```
 
+To stop the server
+```
+Ctrl-C
+```
+
+To restart a  new TMUX screen and start the server
+```
+tmux new-session -s server
+cd krypto-mlp-mockup
+boxenv/bin/uwsgi --ini app.ini
+```
 
 
 # RUNNING THE DEMO ON iOS
